@@ -1,6 +1,6 @@
 {
   "name": "linki",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple library that provides utilities to compose your application from function-based components.",
   "keywords": [
     "callback",
