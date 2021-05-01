@@ -7,7 +7,7 @@
     "dataflow"
   ],
   "author": "Marek Pazik <contact@marekpazik.pl>",
-  "license": "Apache-2.0",
+  "license": "mit",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mpazik/linki.git"
