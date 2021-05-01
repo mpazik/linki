@@ -1,7 +1,11 @@
 {
   "name": "linki",
   "version": "0.0.1",
-  "description": "",
+  "description": "A simple library that provides utilities to compose your application from function-based components.",
+  "keywords": [
+    "callback",
+    "dataflow"
+  ],
   "author": "Marek Pazik <contact@marekpazik.pl>",
   "license": "Apache-2.0",
   "repository": {
