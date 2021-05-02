@@ -1,4 +1,5 @@
 import { Reducer } from "../functions";
+import { equal } from "../functions/utils/equal";
 import { PartialTuple, Tuple } from "../tuple";
 
 import { Callback, Callbacks, Processor, ProcessorMultiIn } from "./types";
@@ -83,4 +84,14 @@ export const withMultiState = <S extends Tuple, V = void>(
       [K in keyof S]: Callback<S[K]>;
     },
   ];
+};
+
+// Could be written as a reducer that attach flag if element has changed, filter that pass only changed elements and mapper that removes the flag
+export const passOnlyChanged = <T>(): Processor<T> => (callback) => {
+  let lastValue: T;
+  return (value) => {
+    if (equal(value, lastValue)) return;
+    lastValue = value;
+    callback(value);
+  };
 };

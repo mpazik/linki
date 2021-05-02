@@ -1,6 +1,7 @@
 import { pipe, Transformer } from "../functions";
 
-import { Processor } from "./types";
+import { Callback, Processor, ProcessorMultiOut } from "./types";
+import { onSecondOutput } from "./utils";
 
 export function map<T, S>(f1: Transformer<T, S>): Processor<T, S>;
 export function map<T1, T2, S>(
@@ -33,3 +34,16 @@ export const cast = <T, S>(): Processor<T, S> => (callback) => (v) =>
 
 export const ignoreParam = (): Processor<unknown, void> => (callback) => () =>
   callback();
+
+export const asyncMap = <T, S>(
+  f: Transformer<T, Promise<S>>
+): ProcessorMultiOut<T, [S, Error]> => ([pushValue, pushError]) => {
+  return (v) => {
+    f(v).then(pushValue).catch(pushError);
+  };
+};
+
+export const asyncMapWithErrorHandler = <T, S>(
+  t: Transformer<T, Promise<S>>,
+  onError: Callback<Error>
+): Processor<T, S> => onSecondOutput(asyncMap(t), onError);

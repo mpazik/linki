@@ -43,6 +43,13 @@ export const wrap = <V, K extends keyof never>(
   ({ [key]: value } as { [A in K]: V });
 
 /**
+ * Atteches the result of the transformation to the original value
+ */
+export const attach = <T, S>(t: Transformer<T, S>): Transformer<T, [T, S]> => (
+  v
+) => [v, t(v)];
+
+/**
  * Transform tuple to an object for all provided keys
  */
 export const toObject = <T>(

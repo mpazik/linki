@@ -1,6 +1,6 @@
 import { Transformer } from "../functions";
 
-import { Processor } from "./types";
+import { Callback, Processor, ProcessorMultiOut } from "./types";
 
 export const toTransformer = <T, S>(
   p: Processor<T, S>
@@ -20,3 +20,8 @@ export const toTransformer = <T, S>(
     return (value as unknown) as S;
   };
 };
+
+export const onSecondOutput = <T, S1, S2>(
+  p: ProcessorMultiOut<T, [S1, S2]>,
+  onSecond: Callback<S2>
+): Processor<T, S1> => (callback) => p([callback, onSecond]);
