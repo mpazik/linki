@@ -13,15 +13,15 @@ export const example: Component<
   { onClick: void; onKeyPress: string },
   { saveNumber: number; displayTotal: number }
   > = ({ saveNumber, displayTotal }) => {
-  const [triggerSave, setupForSave] = wire(withState(0), saveNumber);
+  const [triggerSave, setupForSave] = link(withState(0), saveNumber);
 
   return {
-    onClick: wire(
+    onClick: link(
       throttle(1000),
       reduce(count, 0),
       fork(displayTotal, setupForSave)
     ),
-    onKeyPress: wire(
+    onKeyPress: link(
       filter(isKey("Enter")),
       ignoreParam(),
       triggerSave
