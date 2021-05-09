@@ -16,7 +16,9 @@ export const async = <T>(): AsyncProcessor<T> => ([pushValue, pushError]) => {
   };
 };
 
-export const throttle = <T>(throttle: number): Processor<T> => (callback) => {
+export const throttle = <T>(throttleTime: number): Processor<T> => (
+  callback
+) => {
   let timeout: ReturnType<typeof setTimeout> | null = null;
   let nextQueued = false;
   let argQueued: T;
@@ -35,7 +37,31 @@ export const throttle = <T>(throttle: number): Processor<T> => (callback) => {
       if (nextQueued) {
         trigger(argQueued);
       }
-    }, throttle);
+    }, throttleTime);
   };
   return trigger;
+};
+
+export const debounce = <T>(debounceTime: number): Processor<T> => (
+  callback
+) => {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+
+  return (arg: T) => {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+
+    timeout = setTimeout(() => {
+      callback(arg);
+    }, debounceTime);
+  };
+};
+
+export const nextTick = <T>(): Processor<T> => (callback) => (value) => {
+  setImmediate(() => callback(value));
+};
+
+export const delay = <T>(ms: number): Processor<T> => (callback) => (value) => {
+  setTimeout(() => callback(value), ms);
 };
