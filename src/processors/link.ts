@@ -70,6 +70,11 @@ export function link<T1 extends Tuple, T2, T3, T4, S>(
  * Multi output links
  */
 
+export function link<T, S extends Tuple>(
+  p: ProcessorMultiOut<T, S>,
+  callback: Callbacks<S>
+): Callback<T>;
+
 export function link<T1, T2, S extends Tuple>(
   p1: Processor<T1, T2>,
   p2: ProcessorMultiOut<T2, S>,
