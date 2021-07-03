@@ -87,8 +87,8 @@ export const withMultiState = <S extends Tuple, V = void>(
 };
 
 // Could be written as a reducer that attach flag if element has changed, filter that pass only changed elements and mapper that removes the flag
-export const passOnlyChanged = <T>(): Processor<T> => (callback) => {
-  let lastValue: T;
+export const passOnlyChanged = <T>(init?: T): Processor<T> => (callback) => {
+  let lastValue: T | undefined = init;
   return (value) => {
     if (equal(value, lastValue)) return;
     lastValue = value;
