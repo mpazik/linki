@@ -1,6 +1,7 @@
 import { Transformer } from "../functions";
 
-import { Callback, Processor, ProcessorMultiOut } from "./types";
+import { Processor, ProcessorMultiOut } from "./processor";
+import { Callback } from "./types";
 
 export const toTransformer = <T, S>(
   p: Processor<T, S>
@@ -25,3 +26,10 @@ export const onSecondOutput = <T, S1, S2>(
   p: ProcessorMultiOut<T, [S1, S2]>,
   onSecond: Callback<S2>
 ): Processor<T, S1> => (callback) => p([callback, onSecond]);
+
+export const logger = <T>(name: string): Processor<T, T> => (callback) => (
+  value
+) => {
+  console.log(name, value);
+  callback(value);
+};

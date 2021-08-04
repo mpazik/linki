@@ -1,4 +1,4 @@
-import { Processor, ProcessorMultiOut } from "./types";
+import { Processor, ProcessorMultiOut } from "./processor";
 
 export function filter<T, S extends T>(
   predicate: (v: T) => v is S

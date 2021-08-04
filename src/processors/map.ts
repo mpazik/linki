@@ -1,6 +1,7 @@
 import { pipe, Transformer } from "../functions";
 
-import { Callback, Processor, ProcessorMultiOut } from "./types";
+import { Processor, ProcessorMultiOut } from "./processor";
+import { Callback } from "./types";
 import { onSecondOutput } from "./utils";
 
 export function map<T, S>(f1: Transformer<T, S>): Processor<T, S>;

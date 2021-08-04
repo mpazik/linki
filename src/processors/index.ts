@@ -8,6 +8,7 @@ export * from "./link";
 export * from "./provider";
 export * from "./reduce";
 export * from "./utils";
+export * from "./processor";
 
 export const fork = <T = void>(...consumers: Callback<T>[]): Callback<T> => (
   data

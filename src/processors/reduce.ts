@@ -2,7 +2,8 @@ import { Reducer } from "../functions";
 import { equal } from "../functions/utils/equal";
 import { PartialTuple, Tuple } from "../tuple";
 
-import { Callback, Callbacks, Processor, ProcessorMultiIn } from "./types";
+import { Processor, ProcessorMultiIn } from "./processor";
+import { Callback, Callbacks } from "./types";
 
 export const reduce = <S, C = void>(
   reducer: Reducer<S, C>,
@@ -67,22 +68,21 @@ export const valueWithOptionalState = <S, V>(
 };
 
 export const withMultiState = <S extends Tuple, V = void>(
-  callback: (state: PartialTuple<S>, value: V) => void,
   ...init: PartialTuple<S>
-): [Callback<V>, Callbacks<S>] => {
+): ProcessorMultiIn<[V, ...S], [...PartialTuple<S>, V]> => (callback) => {
   const state = init.slice(0);
 
   return [
-    (v) => {
-      callback((state as unknown) as PartialTuple<S>, v);
-    },
-    (init.map((s, n) => {
+    ((v) => {
+      callback([...((state as unknown) as PartialTuple<S>), v]);
+    }) as Callback<V>,
+    ...(((init.map((s, n) => {
       return (newStateN: unknown) => {
         state[n] = newStateN;
       };
     }) as unknown) as {
       [K in keyof S]: Callback<S[K]>;
-    },
+    }) as Callbacks<S>),
   ];
 };
 

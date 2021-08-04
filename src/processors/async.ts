@@ -2,7 +2,7 @@ import {
   Processor,
   ProcessorMultiInMultiOut,
   ProcessorMultiOut,
-} from "./types";
+} from "./processor";
 
 export type AsyncProcessor<T> = ProcessorMultiOut<Promise<T>, [T, Error]>;
 export type CancelableAsyncProcessor<T> = ProcessorMultiInMultiOut<
