@@ -30,9 +30,6 @@ export function map<T, S>(
   };
 }
 
-export const cast = <T, S>(): Processor<T, S> => (callback) => (v) =>
-  callback((v as unknown) as S);
-
 export const ignoreParam = (): Processor<unknown, void> => (callback) => () =>
   callback();
 

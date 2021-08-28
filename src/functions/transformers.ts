@@ -61,6 +61,8 @@ export const withDefaultValue = <T>(
   defaultValue: T
 ): Transformer<T | undefined | null, T> => (value): T => value ?? defaultValue;
 
+export const cast = <T, S>() => (v: T): S => (v as unknown) as S;
+
 export function pipe<T, S>(f1: (v: T) => S): Transformer<T, S>;
 export function pipe<T, S, U>(
   f1: (v: T) => S,
