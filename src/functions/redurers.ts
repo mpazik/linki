@@ -8,3 +8,8 @@ export const collect = <T>(): Reducer<T[], T> => (array, item) => {
   array.push(item);
   return array;
 };
+
+export const merge = <S, C>(state: S, change: C): S => ({
+  ...state,
+  ...change,
+});
