@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "lint": "yarn eslint src/**",
+    "lint": "yarn eslint . --ext .ts",
     "test": "jest"
   },
   "devDependencies": {

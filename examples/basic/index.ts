@@ -1,11 +1,10 @@
+import type { Component, Predicate } from "../../src";
 import {
-  Component,
   count,
   filter,
   fork,
   ignoreParam,
   link,
-  Predicate,
   reduce,
   throttle,
   withState,
