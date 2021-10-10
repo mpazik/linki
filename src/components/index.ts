@@ -1,4 +1,4 @@
-import { NamedCallbacks } from "../processors";
+import type { NamedCallbacks } from "../processors";
 
 export type Component<T extends object = {}, S extends object = {}> = (
   props: NamedCallbacks<S>

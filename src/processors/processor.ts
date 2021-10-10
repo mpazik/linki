@@ -1,6 +1,6 @@
-import { Tuple } from "../tuple";
+import type { Tuple } from "../tuple";
 
-import { Callback, Callbacks, Close } from "./types";
+import type { Callback, Callbacks, Close } from "./types";
 
 export type Processor<I, O = I> = (callback: Callback<O>) => Callback<I>;
 

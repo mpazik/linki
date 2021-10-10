@@ -1,5 +1,6 @@
 import { defined } from "./predicates";
-import { Transformer, to } from "./transformers";
+import { to } from "./transformers";
+import type { Transformer } from "./transformers";
 
 export const branch = <T1, T2, S>(
   p: (v: T1 | T2) => v is T1,

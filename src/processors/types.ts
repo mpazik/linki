@@ -1,4 +1,4 @@
-import { Tuple } from "../tuple";
+import type { Tuple } from "../tuple";
 
 export type Callback<T = void> = (value: T) => void;
 export type Callbacks<T extends Tuple> = {

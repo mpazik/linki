@@ -1,8 +1,12 @@
-import { Tuple } from "../tuple";
+import type { Tuple } from "../tuple";
 
-import { Processor, ProcessorMultiIn, ProcessorMultiOut } from "./processor";
-import { Provider } from "./provider";
-import { Callbacks, Callback } from "./types";
+import type {
+  Processor,
+  ProcessorMultiIn,
+  ProcessorMultiOut,
+} from "./processor";
+import type { Provider } from "./provider";
+import type { Callbacks, Callback } from "./types";
 
 export function link<T>(callback: Callback<T>): Callback<T>;
 

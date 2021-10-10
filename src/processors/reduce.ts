@@ -1,9 +1,9 @@
-import { Reducer } from "../functions";
+import type { Reducer } from "../functions";
 import { equal } from "../functions/utils/equal";
-import { PartialTuple, Tuple } from "../tuple";
+import type { PartialTuple, Tuple } from "../tuple";
 
-import { Processor, ProcessorMultiIn } from "./processor";
-import { Callback, Callbacks } from "./types";
+import type { Processor, ProcessorMultiIn } from "./processor";
+import type { Callback, Callbacks } from "./types";
 
 export const reduce = <S, C = void>(
   reducer: Reducer<S, C>,

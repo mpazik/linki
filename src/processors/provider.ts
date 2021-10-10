@@ -1,4 +1,4 @@
-import { Callback, Close } from "./types";
+import type { Callback, Close } from "./types";
 
 export type Provider<T> = (callback: Callback<T>) => void;
 

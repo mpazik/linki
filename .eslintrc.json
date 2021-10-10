@@ -27,6 +27,10 @@
         }
       }
     ],
+    "@typescript-eslint/consistent-type-imports": ["warn", {
+      "prefer": "type-imports",
+      "disallowTypeAnnotations": true
+    }],
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/ban-types": "off",
     "prettier/prettier": "error"

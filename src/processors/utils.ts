@@ -1,7 +1,7 @@
-import { Transformer } from "../functions";
+import type { Transformer } from "../functions";
 
-import { Processor, ProcessorMultiOut } from "./processor";
-import { Callback } from "./types";
+import type { Processor, ProcessorMultiOut } from "./processor";
+import type { Callback } from "./types";
 
 export const toTransformer = <T, S>(
   p: Processor<T, S>

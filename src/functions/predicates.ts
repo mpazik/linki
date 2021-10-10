@@ -1,6 +1,6 @@
-import { PartialTuple, Tuple } from "../tuple";
+import type { PartialTuple, Tuple } from "../tuple";
 
-import { Transformer } from "./transformers";
+import type { Transformer } from "./transformers";
 import { equal } from "./utils/equal";
 
 export type Predicate<T> = Transformer<T, boolean>;
