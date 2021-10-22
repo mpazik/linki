@@ -36,6 +36,10 @@ export function link<T1, T2, T3, T4, S>(
   callback: Callback<S>
 ): Callback<T1>;
 
+export function link<T, S>(
+  ...processors: [...Processor<unknown>[], Callback<S>]
+): Callback<T>;
+
 /*
  * Multi input links
  */
