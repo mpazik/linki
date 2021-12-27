@@ -6,7 +6,7 @@ export * from "./async";
 export * from "./map";
 export * from "./link";
 export * from "./provider";
-export * from "./reduce";
+export * from "./state";
 export * from "./utils";
 export * from "./processor";
 
