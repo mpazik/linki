@@ -1,6 +1,6 @@
 {
   "name": "linki",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A simple library that provides utilities to compose your application from function-based components.",
   "keywords": [
     "componenets",
@@ -49,7 +49,9 @@
   ],
   "jest": {
     "transform": {
-      "^.+\\.(t|j)s$": ["esbuild-jest"]
+      "^.+\\.(t|j)s$": [
+        "esbuild-jest"
+      ]
     }
   }
 }
