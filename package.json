@@ -1,6 +1,6 @@
 {
   "name": "linki",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "A simple library that provides utilities to compose your application from function-based components.",
   "keywords": [
     "componenets",
@@ -23,7 +23,8 @@
     "/dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
+    "prepack": " yarn build",
     "lint": "yarn eslint . --ext .ts",
     "test": "jest"
   },
