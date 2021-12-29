@@ -1,9 +1,14 @@
-# Linki
+# Linki - Framework-less reactive programming
 A simple library that provides utilities to compose your application from function-based components.
 
-Linki's connections could be mapped one-to-one into a diagram.
+Linki's connections could be mapped into a diagram.
 It is technically possible to autogenerate diagrams from the code or the code from the diagrams or even visualize a working application to better understand the app and easier debugging.
 
+## No code framework
+Linki provides a frame for your application but consists only of typed patterns and small, common utilities function.
+
+It prioritizes simplicity, so you know exactly what you are doing.
+As it is extremely simple it is very performant as well, has minimal footprint, easy to learn, maintain and extend.
 
 ## Example
 A simple component that counts click events, and when the enter key is pressed, it sends the total number to save.
@@ -106,8 +111,9 @@ Reactive programming libraries use a stream abstraction with a protocol of commu
 That protocol allows passing extra information from upstream to downstream, like if a stream has completed or if an error occurred;
 and also pass messages from downstream to upstream, like if more data is required.
 
-However, that also introduces some mental and little performance overhead.
+However, that also introduces some cognitive and computation overhead.
 Additionally, that protocol is not trivial to extend, and it is often limited to building pipelines, not networks consisting of nodes with multiple inputs and outputs.
 
-Linki is designed to promote the use of the simple required tool for the task.
+Linki is designed to promote the use of the simples required tool for the task. 
+It provides low level functions that do the job well as also more sophisticated patters for more complex cases.
 
