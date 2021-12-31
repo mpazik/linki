@@ -43,7 +43,7 @@ export const wrap = <V, K extends keyof never>(
   ({ [key]: value } as { [A in K]: V });
 
 /**
- * Atteches the result of the transformation to the original value
+ * Attaches the result of the transformation to the original value
  */
 export const attach = <T, S>(t: Transformer<T, S>): Transformer<T, [T, S]> => (
   v
@@ -91,3 +91,10 @@ export function pipe(
       v
     );
 }
+
+export const match = <T, S>(
+  entries: readonly (readonly [T, S])[]
+): Transformer<T, S | undefined> => {
+  const map = new Map(entries);
+  return (v: T) => map.get(v);
+};
