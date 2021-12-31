@@ -113,14 +113,21 @@ export function valueWithOptionalState<S, V>(
 /**
  * Could be written as a reducer that attach flag if element has changed, filter that pass only changed elements and mapper that removes the flag
  */
-export const passOnlyChanged = <T>(
-  init: T,
-  equalizer: (a: T, b: T) => boolean = defaultEqualCheck
-): Processor<T> => (callback) => {
-  let lastValue: T = init;
-  return (value) => {
-    if (equalizer(lastValue, value)) return;
-    lastValue = value;
-    callback(value);
+export const passOnlyChangedFactory = (
+  equalizer: (a: unknown, b: unknown) => boolean
+): (<S>(initState?: S) => Processor<S>) =>
+  function (initState) {
+    return (callback) => {
+      let state = initState;
+      let stateSet = arguments.length > 0;
+
+      return (value) => {
+        if (stateSet && equalizer(state!, value)) return;
+        state = value;
+        stateSet = true;
+        callback(value);
+      };
+    };
   };
-};
+
+export const passOnlyChanged = passOnlyChangedFactory(defaultEqualCheck);
