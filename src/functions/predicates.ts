@@ -1,9 +1,8 @@
 import type { PartialTuple, Tuple } from "../tuple";
 
-import type { Transformer } from "./transformers";
 import { equal } from "./utils/equal";
 
-export type Predicate<T> = Transformer<T, boolean>;
+export type Predicate<T> = (v: T) => boolean;
 
 export const not = <T>(predicate: Predicate<T>) => (v: T): boolean =>
   !predicate(v);
