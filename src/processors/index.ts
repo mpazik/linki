@@ -4,6 +4,7 @@ export * from "./types";
 export * from "./filter";
 export * from "./async";
 export * from "./map";
+export * from "./kick";
 export * from "./link";
 export * from "./provider";
 export * from "./state";
