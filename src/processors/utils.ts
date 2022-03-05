@@ -27,6 +27,10 @@ export const onSecondOutput = <T, S1, S2>(
   onSecond: Callback<S2>
 ): Processor<T, S1> => (callback) => p([callback, onSecond]);
 
+export const logError = <I, O>(
+  p: ProcessorMultiOut<I, [O, unknown]>
+): Processor<I, O> => onSecondOutput(p, (e) => console.error(e));
+
 export const logger = <T>(name: string): Processor<T, T> => (callback) => (
   value
 ) => {
