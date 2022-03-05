@@ -15,6 +15,12 @@ export function filter<T>(predicate: Predicate<T>): Processor<T> {
   };
 }
 
+export function split<T, S>(
+  predicate: (v: T | S) => v is T
+): ProcessorMultiOut<T | S, [T, S]>;
+
+export function split<T>(predicate: Predicate<T>): ProcessorMultiOut<T, [T, T]>;
+
 export function split<T>(
   predicate: Predicate<T>
 ): ProcessorMultiOut<T, [T, T]> {
