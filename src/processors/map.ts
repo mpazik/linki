@@ -1,7 +1,7 @@
 import type { Transformer } from "../functions";
 import { pipe } from "../functions";
 
-import type { Processor } from "./processor";
+import type { Processor, ProcessorMultiOut } from "./processor";
 
 export function map<T, S>(f1: Transformer<T, S>): Processor<T, S>;
 export function map<T1, T2, S>(
@@ -24,10 +24,18 @@ export function map<T, S>(
   ...functions: Transformer<unknown, unknown>[]
 ): Processor<T, S> {
   const transform = pipe(...functions) as Transformer<T, S>;
-  return (callback) => {
-    return (v) => callback(transform(v));
-  };
+  return (callback) => (v) => callback(transform(v));
 }
+
+export const tryMap = <I, O>(
+  mapper: (value: I) => O
+): ProcessorMultiOut<I, [O, unknown]> => ([output, onError]) => (value) => {
+  try {
+    output(mapper(value));
+  } catch (e) {
+    onError(e);
+  }
+};
 
 export const ignoreParam = (): Processor<unknown, void> => (callback) => () =>
   callback();
