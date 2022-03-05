@@ -22,13 +22,13 @@ export const async = <T>(): AsyncProcessor<T> => ([pushValue, pushError]) => {
 
 export const asyncMap = <T, S>(
   f: Transformer<T, Promise<S>>
-): ProcessorMultiOut<T, [S, Error]> => ([pushValue, pushError]) => (v) => {
+): ProcessorMultiOut<T, [S, unknown]> => ([pushValue, pushError]) => (v) => {
   f(v).then(pushValue).catch(pushError);
 };
 
 export const asyncMapWithErrorHandler = <T, S>(
   t: Transformer<T, Promise<S>>,
-  onError: Callback<Error>
+  onError: Callback<unknown>
 ): Processor<T, S> => onSecondOutput(asyncMap(t), onError);
 
 export const throttle = <T>(throttleTime: number): Processor<T> => (
