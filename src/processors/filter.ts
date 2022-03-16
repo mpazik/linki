@@ -1,5 +1,5 @@
 import type { Predicate } from "../functions";
-import { defined } from "../functions";
+import { defined, definedProp } from "../functions";
 
 import type { Processor, ProcessorMultiOut } from "./processor";
 
@@ -32,6 +32,12 @@ export function split<T>(
 export const splitDefined = <T>(): ProcessorMultiOut<
   T | undefined,
   [T, undefined]
-> => ([onFirst, onSecond]) => (value) => {
-  defined(value) ? onFirst(value) : onSecond(value);
-};
+> => split(defined);
+
+export const splitDefinedProp = <T extends object, K extends keyof T>(
+  key: K
+): ProcessorMultiOut<T, [T & Required<Pick<T, K>>, Omit<T, K>]> =>
+  split(definedProp<T, K>(key)) as ProcessorMultiOut<
+    T,
+    [T & Required<Pick<T, K>>, Omit<T, K>]
+  >;
