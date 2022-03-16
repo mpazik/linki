@@ -92,6 +92,31 @@ export function link<T1, T2, T3, S extends Tuple>(
 ): Callback<T1>;
 
 /*
+ * Multi input and output links
+ */
+
+export function link<T1 extends Tuple, T2, S extends Tuple>(
+  p1: ProcessorMultiIn<T1, T2>,
+  p2: ProcessorMultiOut<T2, S>,
+  callback: Callbacks<S>
+): Callbacks<T1>;
+
+export function link<T1 extends Tuple, T2, T3, S extends Tuple>(
+  p1: ProcessorMultiIn<T1, T2>,
+  p2: Processor<T2, T3>,
+  p3: ProcessorMultiOut<T3, S>,
+  callback: Callbacks<S>
+): Callbacks<T1>;
+
+export function link<T1 extends Tuple, T2, T3, T4, S extends Tuple>(
+  p1: ProcessorMultiIn<T1, T2>,
+  p2: Processor<T2, T3>,
+  p3: Processor<T3, T4>,
+  p4: ProcessorMultiOut<T4, S>,
+  callback: Callbacks<S>
+): Callbacks<T1>;
+
+/*
  * Closed links
  */
 
