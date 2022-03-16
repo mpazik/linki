@@ -6,7 +6,13 @@ export const ignore: Transformer<unknown, void> = () => {
   // do nothing
 };
 
-export const to = <T>(v: T): Transformer<unknown, T> => (): T => v;
+export const to = <T>(v: (() => T) | T): Transformer<unknown, T> =>
+  typeof v === "function" ? () => (v as () => T)() : () => v;
+
+export const withDefault = <T>(
+  d: (() => T) | T
+): Transformer<T | undefined, T> =>
+  typeof d === "function" ? (v) => v ?? (d as () => T)() : (v) => v ?? d;
 
 /**
  * Returns first item from an array
