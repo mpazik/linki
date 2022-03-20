@@ -39,3 +39,6 @@ export const tryMap = <I, O>(
 
 export const ignoreParam = (): Processor<unknown, void> => (callback) => () =>
   callback();
+
+export const flatten = <T>(): Processor<T[], T> => (callback) => (v) =>
+  v.forEach(callback);
