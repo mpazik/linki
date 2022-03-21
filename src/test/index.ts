@@ -1,5 +1,7 @@
-export const newProbe = <T>(): [
-  captureData: (it: T) => void,
+import type { Callback } from "../processors";
+
+export const newProbe = <T = void>(): [
+  captureData: Callback<T>,
   getCapturedData: () => T[]
 ] => {
   let data: T[] = [];
