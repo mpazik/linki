@@ -13,3 +13,5 @@ export const merge = <S, C>(state: S, change: C): S => ({
   ...state,
   ...change,
 });
+
+export * from "./changers";
