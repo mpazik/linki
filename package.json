@@ -1,5 +1,6 @@
 {
   "name": "linki",
+  "type": "module",
   "version": "0.1.13",
   "description": "A simple library that provides utilities to compose your application from function-based components.",
   "keywords": [
