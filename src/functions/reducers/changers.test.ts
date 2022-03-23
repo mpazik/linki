@@ -1,12 +1,12 @@
 import type {
   BooleanChange,
-  ListChange,
+  ArrayChange,
   MapChange,
   ObjectChange,
 } from "./changers";
 import {
   booleanChanger,
-  listChanger,
+  arrayChanger,
   mapChanger,
   objectChanger,
   setToChanger,
@@ -62,10 +62,10 @@ type List = ListItem[];
 describe("listChanger", () => {
   const check = (
     state: List,
-    change: ListChange<ListItem, number>,
+    change: ArrayChange<ListItem, number>,
     expected: List
   ) => () => {
-    expect(listChanger((item: ListItem) => item[0])(state, change)).toEqual(
+    expect(arrayChanger((item: ListItem) => item[0])(state, change)).toEqual(
       expected
     );
   };

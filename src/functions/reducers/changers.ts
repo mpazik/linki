@@ -50,14 +50,14 @@ export const objectChanger = <T>(): Reducer<T, ObjectChange<T>> => (
   }
 };
 
-export type ListChange<I, ID> =
+export type ArrayChange<I, ID> =
   | SetToChange<I[]>
   | [op: "set", item: I]
   | [op: "del", id: ID];
 
-export const listChanger = <I, ID>(
+export const arrayChanger = <I, ID>(
   getId: (item: I) => ID
-): Reducer<I[], ListChange<I, ID>> => (state, op) => {
+): Reducer<I[], ArrayChange<I, ID>> => (state, op) => {
   const findIndex = (id: ID) => state.findIndex((it) => getId(it) === id);
   switch (op[0]) {
     case "to": {
