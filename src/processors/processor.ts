@@ -1,17 +1,18 @@
 import type { Tuple } from "../tuple";
 
-import type { Callback, Callbacks, Close } from "./types";
+import type { Callback, Callbacks } from "./types";
 
 export type Processor<I, O = I> = (callback: Callback<O>) => Callback<I>;
-
-// Specialized binary input processor, second input is for sending close signal
-export type ClosableProcessor<I1, O = I1> = (
-  callback: Callback<O>
-) => [onValue: Callback<I1>, onClose: Close];
 
 export type ProcessorMultiIn<I extends Tuple, O> = (
   callback: Callback<O>
 ) => Callbacks<I>;
+
+// Specialized binary input processor, second input is for sending close signal
+export type ClosableProcessor<I, O = I> = ProcessorMultiIn<
+  [onValue: I, onClose: void],
+  O
+>;
 
 export type ProcessorMultiOut<I, O extends Tuple> = (
   callback: Callbacks<O>
