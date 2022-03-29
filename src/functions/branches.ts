@@ -11,4 +11,4 @@ export const branch = <T1, T2, S>(
 export const passUndefined = <T, S>(
   map: Transformer<T, S>
 ): Transformer<T | undefined, S | undefined> =>
-  branch(defined, map, to(undefined));
+  branch<T, undefined, S | undefined>(defined, map, to(undefined));
