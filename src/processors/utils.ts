@@ -3,6 +3,8 @@ import type { Transformer } from "../functions";
 import type { Processor, ProcessorMultiOut } from "./processor";
 import type { Callback } from "./types";
 
+import clearAllMocks = jest.clearAllMocks;
+
 export const triggerEffect = <T>(handler: (data: T) => void): Processor<T> => (
   callback
 ) => (data) => {
@@ -45,3 +47,6 @@ export const onSecondOutput = <T, S1, S2>(
 export const withErrorLogging = <I, O>(
   p: ProcessorMultiOut<I, [O, unknown]>
 ): Processor<I, O> => onSecondOutput(p, (e) => console.error(e));
+
+export const push = <T>(v: (() => T) | T): Processor<void, T> => (callback) =>
+  v instanceof Function ? () => callback(v()) : () => callback(v);
