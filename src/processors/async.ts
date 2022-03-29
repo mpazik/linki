@@ -5,8 +5,6 @@ import type {
   ProcessorMultiInMultiOut,
   ProcessorMultiOut,
 } from "./processor";
-import type { Callback } from "./types";
-import { onSecondOutput } from "./utils";
 
 export type AsyncProcessor<T> = ProcessorMultiOut<Promise<T>, [T, Error]>;
 export type CancelableAsyncProcessor<T> = ProcessorMultiInMultiOut<
@@ -20,16 +18,14 @@ export const async = <T>(): AsyncProcessor<T> => ([pushValue, pushError]) => {
   };
 };
 
+/**
+ * Check {@link onSecondOutput} or {@link withErrorLogging} utilities that could help with error handling.
+ */
 export const asyncMap = <T, S>(
   f: Transformer<T, Promise<S>>
 ): ProcessorMultiOut<T, [S, unknown]> => ([pushValue, pushError]) => (v) => {
   f(v).then(pushValue).catch(pushError);
 };
-
-export const asyncMapWithErrorHandler = <T, S>(
-  t: Transformer<T, Promise<S>>,
-  onError: Callback<unknown>
-): Processor<T, S> => onSecondOutput(asyncMap(t), onError);
 
 export const throttle = <T>(throttleTime: number): Processor<T> => (
   callback

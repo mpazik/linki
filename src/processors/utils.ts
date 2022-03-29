@@ -3,6 +3,21 @@ import type { Transformer } from "../functions";
 import type { Processor, ProcessorMultiOut } from "./processor";
 import type { Callback } from "./types";
 
+export const triggerEffect = <T>(handler: (data: T) => void): Processor<T> => (
+  callback
+) => (data) => {
+  handler(data);
+  callback(data);
+};
+
+export const logIt = <T>(name = "🧐 ㏒: "): Processor<T, T> =>
+  triggerEffect((data) => console.info(name, data));
+
+export const logAsError = <T>(name?: string): Processor<T, T> =>
+  triggerEffect(
+    name ? (data) => console.error(name, data) : (data) => console.error(data)
+  );
+
 export const toTransformer = <T, S>(
   p: Processor<T, S>
 ): Transformer<T, S | undefined> => {
@@ -24,16 +39,9 @@ export const toTransformer = <T, S>(
 
 export const onSecondOutput = <T, S1, S2>(
   p: ProcessorMultiOut<T, [S1, S2]>,
-  onSecond: Callback<S2>
-): Processor<T, S1> => (callback) => p([callback, onSecond]);
+  handler: Callback<S2>
+): Processor<T, S1> => (callback) => p([callback, handler]);
 
-export const logError = <I, O>(
+export const withErrorLogging = <I, O>(
   p: ProcessorMultiOut<I, [O, unknown]>
 ): Processor<I, O> => onSecondOutput(p, (e) => console.error(e));
-
-export const logger = <T>(name: string): Processor<T, T> => (callback) => (
-  value
-) => {
-  console.log(name, value);
-  callback(value);
-};
