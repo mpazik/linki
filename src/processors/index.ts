@@ -11,8 +11,8 @@ export * from "./state";
 export * from "./utils";
 export * from "./processor";
 
-export const fork = <T = void>(...consumers: Callback<T>[]): Callback<T> => (
-  data
-) => {
-  consumers.forEach((push) => push(data));
-};
+export const fork =
+  <T = void>(...consumers: Callback<T>[]): Callback<T> =>
+  (data) => {
+    consumers.forEach((push) => push(data));
+  };

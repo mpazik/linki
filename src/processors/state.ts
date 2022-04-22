@@ -4,17 +4,15 @@ import { equal as defaultEqualCheck } from "../functions/utils/equal";
 import type { Processor, ProcessorMultiIn } from "./processor";
 import type { Callbacks } from "./types";
 
-export const reduce = <S, C = void>(
-  reducer: Reducer<S, C>,
-  init: S
-): Processor<C, S> => (callback) => {
-  let state: S = init;
-
-  return (change) => {
-    state = reducer(state, change);
-    callback(state);
+export const reduce =
+  <S, C = void>(reducer: Reducer<S, C>, init: S): Processor<C, S> =>
+  (callback) => {
+    let state: S = init;
+    return (change) => {
+      state = reducer(state, change);
+      callback(state);
+    };
   };
-};
 
 /**
  * Combines states from multiple sources into a single array.
@@ -22,16 +20,16 @@ export const reduce = <S, C = void>(
  * It is a type of reducer that combines partial states and return combined state.
  * (state, [index, change]) => { state[index] = change; return state; }
  */
-export const combine = <S extends unknown[]>(
-  ...init: S
-): ProcessorMultiIn<S, S> => (callback) => {
-  const state: S = init;
+export const combine =
+  <S extends unknown[]>(...init: S): ProcessorMultiIn<S, S> =>
+  (callback) => {
+    const state: S = init;
 
-  return (init.map((s, index) => (change: S[keyof S]) => {
-    state[index] = change;
-    callback(state);
-  }) as unknown) as Callbacks<S>;
-};
+    return init.map((s, index) => (change: S[keyof S]) => {
+      state[index] = change;
+      callback(state);
+    }) as unknown as Callbacks<S>;
+  };
 
 /**
  * On signal returns a state stored earlier
@@ -40,12 +38,12 @@ export const combine = <S extends unknown[]>(
  * ([lastCommand, state], [command, value]) => [command, command === store ? value : state]
  * filter(([lastCommand]) => lastCommand === store)
  */
-export const withState = <S>(initState: S): ProcessorMultiIn<[void, S], S> => (
-  callback
-) => {
-  let state: S = initState;
-  return [() => callback(state), (s) => (state = s)];
-};
+export const withState =
+  <S>(initState: S): ProcessorMultiIn<[void, S], S> =>
+  (callback) => {
+    let state: S = initState;
+    return [() => callback(state), (s) => (state = s)];
+  };
 
 /**
  * Returns an input item with a state stored earlier
@@ -53,12 +51,12 @@ export const withState = <S>(initState: S): ProcessorMultiIn<[void, S], S> => (
  * It is a type of reducer that accepts "store" and "return" commands, and ignores output for store command
  * ([lastCommand, state], [command, value]) => [command, command === store ? value : state]
  */
-export const valueWithState = <S, V>(
-  initState: S
-): ProcessorMultiIn<[V, S], [S, V]> => (callback) => {
-  let state: S = initState;
-  return [(v) => callback([state, v]), (s) => (state = s)];
-};
+export const valueWithState =
+  <S, V>(initState: S): ProcessorMultiIn<[V, S], [S, V]> =>
+  (callback) => {
+    let state: S = initState;
+    return [(v) => callback([state, v]), (s) => (state = s)];
+  };
 
 /**
  * On signal returns a state stored earlier
@@ -68,20 +66,18 @@ export const valueWithState = <S, V>(
 export function withOptionalState<S>(
   initState?: S
 ): ProcessorMultiIn<[callback: void, set: S, reset: void], S> {
-  return (callback) => {
-    let state = initState;
-    let stateSet = arguments.length > 0;
-    return [
-      () => {
-        if (stateSet) callback(state!);
-      },
-      (s) => {
-        state = s;
-        stateSet = true;
-      },
-      () => (stateSet = false),
-    ];
-  };
+  let state = initState;
+  let stateSet = arguments.length > 0;
+  return (callback) => [
+    () => {
+      if (stateSet) callback(state!);
+    },
+    (s) => {
+      state = s;
+      stateSet = true;
+    },
+    () => (stateSet = false),
+  ];
 }
 
 /**
@@ -92,22 +88,20 @@ export function withOptionalState<S>(
 export function valueWithOptionalState<S, V>(
   initState?: S
 ): ProcessorMultiIn<[callback: V, set: S, reset: void], [S | undefined, V]> {
-  return (callback) => {
-    let state: S | undefined = initState;
-    let stateSet = arguments.length > 0;
-    return [
-      (v) => {
-        if (stateSet) {
-          callback([state, v]);
-        }
-      },
-      (s) => {
-        state = s;
-        stateSet = true;
-      },
-      () => (stateSet = false),
-    ];
-  };
+  let state: S | undefined = initState;
+  let stateSet = arguments.length > 0;
+  return (callback) => [
+    (v) => {
+      if (stateSet) {
+        callback([state, v]);
+      }
+    },
+    (s) => {
+      state = s;
+      stateSet = true;
+    },
+    () => (stateSet = false),
+  ];
 }
 
 /**
@@ -117,16 +111,14 @@ export const passOnlyChangedFactory = (
   equalizer: (a: unknown, b: unknown) => boolean
 ): (<S>(initState?: S) => Processor<S>) =>
   function (initState) {
-    return (callback) => {
-      let state = initState;
-      let stateSet = arguments.length > 0;
+    let state = initState;
+    let stateSet = arguments.length > 0;
 
-      return (value) => {
-        if (stateSet && equalizer(state!, value)) return;
-        state = value;
-        stateSet = true;
-        callback(value);
-      };
+    return (callback) => (value) => {
+      if (stateSet && equalizer(state!, value)) return;
+      state = value;
+      stateSet = true;
+      callback(value);
     };
   };
 

@@ -19,13 +19,10 @@ describe("setToChanger", () => {
 });
 
 describe("booleanChanger", () => {
-  const check = (
-    state: boolean,
-    change: BooleanChange,
-    expected: boolean
-  ) => () => {
-    expect(booleanChanger()(state, change)).toEqual(expected);
-  };
+  const check =
+    (state: boolean, change: BooleanChange, expected: boolean) => () => {
+      expect(booleanChanger()(state, change)).toEqual(expected);
+    };
 
   test("toggle from false to true", check(false, ["tgl"], true));
   test("toggle from true to false", check(true, ["tgl"], false));
@@ -34,9 +31,11 @@ describe("booleanChanger", () => {
 });
 
 describe("objectChanger", () => {
-  const check = <T>(state: T, change: ObjectChange<T>, expected: T) => () => {
-    expect(objectChanger<T>()(state, change)).toEqual(expected);
-  };
+  const check =
+    <T>(state: T, change: ObjectChange<T>, expected: T) =>
+    () => {
+      expect(objectChanger<T>()(state, change)).toEqual(expected);
+    };
   const state = () => ({ test: "text", value: 5 });
 
   test(
@@ -60,15 +59,13 @@ type ListItem = [number, string];
 type List = ListItem[];
 
 describe("listChanger", () => {
-  const check = (
-    state: List,
-    change: ArrayChange<ListItem, number>,
-    expected: List
-  ) => () => {
-    expect(arrayChanger((item: ListItem) => item[0])(state, change)).toEqual(
-      expected
-    );
-  };
+  const check =
+    (state: List, change: ArrayChange<ListItem, number>, expected: List) =>
+    () => {
+      expect(arrayChanger((item: ListItem) => item[0])(state, change)).toEqual(
+        expected
+      );
+    };
   const state = (): List => [
     [1, "first"],
     [2, "second"],
@@ -105,13 +102,11 @@ describe("listChanger", () => {
 });
 
 describe("mapChanger", () => {
-  const check = <K, V>(
-    state: Map<K, V>,
-    change: MapChange<K, V>,
-    expected: Map<K, V>
-  ) => () => {
-    expect(mapChanger()(state, change)).toEqual(expected);
-  };
+  const check =
+    <K, V>(state: Map<K, V>, change: MapChange<K, V>, expected: Map<K, V>) =>
+    () => {
+      expect(mapChanger()(state, change)).toEqual(expected);
+    };
   const state = (): Map<number, string> =>
     new Map([
       [1, "first"],

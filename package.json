@@ -24,36 +24,16 @@
     "/dist"
   ],
   "scripts": {
-    "build": "rm -rf dist && tsc",
-    "prepack": " yarn build",
-    "lint": "yarn eslint . --ext .ts && tsc --noEmit",
-    "test": "jest"
+    "build": "tdl-build",
+    "prepack": "yarn build",
+    "lint": "tdl-lint",
+    "test": "tdl-test"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.23",
-    "@typescript-eslint/eslint-plugin": "^4.3.0",
-    "@typescript-eslint/parser": "^4.3.0",
-    "esbuild": "^0.14.6",
-    "esbuild-jest": "^0.5.0",
-    "eslint": "^7.10.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-import-resolver-node": "^0.3.4",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-unused-imports": "^1.1.1",
-    "jest": "^27.4.5",
-    "prettier": "^2.2.1",
-    "typescript": "^4.2.4"
+    "typescript-dev-loop": "^0.0.3"
   },
-  "eslintIgnore": [
-    "node_modules",
-    "dist"
-  ],
-  "jest": {
-    "transform": {
-      "^.+\\.(t|j)s$": [
-        "esbuild-jest"
-      ]
-    }
+  "eslintConfig": {
+    "root": true,
+    "extends": "./node_modules/typescript-dev-loop/config/eslint.json"
   }
 }

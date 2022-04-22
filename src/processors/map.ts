@@ -27,18 +27,22 @@ export function map<T, S>(
   return (callback) => (v) => callback(transform(v));
 }
 
-export const tryMap = <I, O>(
-  mapper: (value: I) => O
-): ProcessorMultiOut<I, [O, unknown]> => ([output, onError]) => (value) => {
-  try {
-    output(mapper(value));
-  } catch (e) {
-    onError(e);
-  }
-};
+export const tryMap =
+  <I, O>(mapper: (value: I) => O): ProcessorMultiOut<I, [O, unknown]> =>
+  ([output, onError]) =>
+  (value) => {
+    try {
+      output(mapper(value));
+    } catch (e) {
+      onError(e);
+    }
+  };
 
 export const ignoreParam = (): Processor<unknown, void> => (callback) => () =>
   callback();
 
-export const flatten = <T>(): Processor<T[], T> => (callback) => (v) =>
-  v.forEach(callback);
+export const flatten =
+  <T>(): Processor<T[], T> =>
+  (callback) =>
+  (v) =>
+    v.forEach(callback);

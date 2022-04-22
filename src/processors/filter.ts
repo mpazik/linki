@@ -24,9 +24,10 @@ export function split<T>(predicate: Predicate<T>): ProcessorMultiOut<T, [T, T]>;
 export function split<T>(
   predicate: Predicate<T>
 ): ProcessorMultiOut<T, [T, T]> {
-  return ([onFirst, onSecond]) => (value) => {
-    predicate(value) ? onFirst(value) : onSecond(value);
-  };
+  return ([onFirst, onSecond]) =>
+    (value) => {
+      predicate(value) ? onFirst(value) : onSecond(value);
+    };
 }
 
 export const splitDefined = <T>(): ProcessorMultiOut<
