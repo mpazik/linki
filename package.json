@@ -1,7 +1,7 @@
 {
   "name": "linki",
   "type": "module",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "description": "A simple library that provides utilities to compose your application from function-based components.",
   "keywords": [
     "componenets",
@@ -20,6 +20,12 @@
   "homepage": "https://github.com/mpazik/linki#readme",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "files": [
     "/dist"
   ],
@@ -30,7 +36,7 @@
     "test": "tdl-test"
   },
   "devDependencies": {
-    "typescript-dev-loop": "^0.0.3"
+    "typescript-dev-loop": "^0.0.4"
   },
   "eslintConfig": {
     "root": true,
