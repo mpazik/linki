@@ -8,6 +8,10 @@ yarn-error.log*
 
 # IDEs
 .idea
+.vscode
 
 # Build output
 /dist
+
+# misc
+.DS_Store
