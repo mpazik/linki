@@ -3467,10 +3467,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript-dev-loop@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/typescript-dev-loop/-/typescript-dev-loop-0.0.4.tgz#1105f2586397dba6966af71c09c7f27ac90dba6f"
-  integrity sha512-BFiJ6Lv/7mjil/qu2ITeVcB1yr4prCPUbNn5tgoAYcgRoxPPDSsWoscHGcyeb1/ddADSLwFhxShjdAw4sbXOqQ==
+typescript-dev-loop@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/typescript-dev-loop/-/typescript-dev-loop-0.0.7.tgz#74ffed1abf597eb617528f1672afa1893239d53a"
+  integrity sha512-c9XtGW/vCbGGe3wyGBZFfeoADqbUAE5//11cLnFKd6t2OshG+9Q9McGbt4zkMJ9ITPQsveU/4Davz6By1youWA==
   dependencies:
     "@swc/cli" "^0.1.57"
     "@swc/core" "^1.2.170"
