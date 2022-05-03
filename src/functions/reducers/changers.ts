@@ -51,8 +51,13 @@ export type ArrayChange<I, ID> =
   | [op: "set", item: I]
   | [op: "del", id: ID];
 
+export type AppendDirection = "append" | "prepend";
+
 export const arrayChanger =
-  <I, ID>(getId: (item: I) => ID): Reducer<I[], ArrayChange<I, ID>> =>
+  <I, ID>(
+    getId: (item: I) => ID,
+    direction: AppendDirection = "append"
+  ): Reducer<I[], ArrayChange<I, ID>> =>
   (state, op) => {
     const findIndex = (id: ID) => state.findIndex((it) => getId(it) === id);
     switch (op[0]) {
@@ -65,7 +70,11 @@ export const arrayChanger =
         if (i >= 0) {
           state[i] = item;
         } else {
-          state.push(item);
+          if (direction === "append") {
+            state.push(item);
+          } else {
+            state.unshift(item);
+          }
         }
         return state;
       }
