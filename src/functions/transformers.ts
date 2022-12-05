@@ -79,21 +79,66 @@ export const cast =
     v as unknown as S;
 
 export function pipe<T, S>(f1: (v: T) => S): Transformer<T, S>;
-export function pipe<T, S, U>(
-  f1: (v: T) => S,
-  f2: (v: S) => U
-): Transformer<T, U>;
-export function pipe<T, S, U, W>(
-  f1: (v: T) => S,
-  f2: (v: S) => U,
-  f3: (v: U) => W
-): Transformer<T, W>;
-export function pipe<T, S, U, W, Q>(
-  f1: (v: T) => S,
-  f2: (v: S) => U,
-  f3: (v: U) => W,
-  f4: (v: W) => Q
-): Transformer<T, Q>;
+export function pipe<T, T2, S>(
+  f1: (v: T) => T2,
+  f2: (v: T2) => S
+): Transformer<T, S>;
+export function pipe<T, T2, T3, S>(
+  f1: (v: T) => T2,
+  f2: (v: T2) => T3,
+  f3: (v: T3) => S
+): Transformer<T, S>;
+export function pipe<T, T2, T3, T4, S>(
+  f1: (v: T) => T2,
+  f2: (v: T2) => T3,
+  f3: (v: T3) => T4,
+  f4: (v: T4) => S
+): Transformer<T, S>;
+export function pipe<T, T2, T3, T4, T5, S>(
+  f1: (v: T) => T2,
+  f2: (v: T2) => T3,
+  f3: (v: T3) => T4,
+  f4: (v: T4) => T5,
+  f5: (v: T5) => S
+): Transformer<T, S>;
+export function pipe<T, T2, T3, T4, T5, T6, S>(
+  f1: (v: T) => T2,
+  f2: (v: T2) => T3,
+  f3: (v: T3) => T4,
+  f4: (v: T4) => T5,
+  f5: (v: T5) => T6,
+  f6: (v: T6) => S
+): Transformer<T, S>;
+export function pipe<T, T2, T3, T4, T5, T6, T7, S>(
+  f1: (v: T) => T2,
+  f2: (v: T2) => T3,
+  f3: (v: T3) => T4,
+  f4: (v: T4) => T5,
+  f5: (v: T5) => T6,
+  f6: (v: T6) => T7,
+  f7: (v: T7) => S
+): Transformer<T, S>;
+export function pipe<T, T2, T3, T4, T5, T6, T7, T8, S>(
+  f1: (v: T) => T2,
+  f2: (v: T2) => T3,
+  f3: (v: T3) => T4,
+  f4: (v: T4) => T5,
+  f5: (v: T5) => T6,
+  f6: (v: T6) => T7,
+  f7: (v: T7) => T8,
+  f8: (v: T8) => S
+): Transformer<T, S>;
+export function pipe<T, T2, T3, T4, T5, T6, T7, T8, T9, S>(
+  f1: (v: T) => T2,
+  f2: (v: T2) => T3,
+  f3: (v: T3) => T4,
+  f4: (v: T4) => T5,
+  f5: (v: T5) => T6,
+  f6: (v: T6) => T7,
+  f7: (v: T7) => T8,
+  f8: (v: T8) => T9,
+  f9: (v: T9) => S
+): Transformer<T, S>;
 export function pipe(
   ...functions: Transformer<unknown, unknown>[]
 ): Transformer<unknown, unknown>;
