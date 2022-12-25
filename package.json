@@ -37,7 +37,7 @@
     "test": "tdl-test"
   },
   "devDependencies": {
-    "typescript-dev-loop": "^0.0.9"
+    "typescript-dev-loop": "^0.1.1"
   },
   "eslintConfig": {
     "root": true,
